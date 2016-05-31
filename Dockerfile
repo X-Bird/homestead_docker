@@ -41,8 +41,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc
 RUN apt-get update
 # Base Packages
 
-RUN apt-get install -y --force-yes build-essential curl fail2ban gcc git libmcrypt4 libpcre3-dev \
-make python2.7 python-pip supervisor ufw unattended-upgrades unzip whois zsh
+RUN apt-get install -y --force-yes build-essential curl fail2ban gcc git libmcrypt4 libpcre3-dev make python2.7 python-pip supervisor ufw unattended-upgrades unzip whois zsh
 
 # Install Python Httpie
 RUN pip install httpie

@@ -5,7 +5,7 @@
 FROM ubuntu:14.04
 MAINTAINER x-bird <x-bird@qiubs.com>
 
-RUN apt-get update && && apt-get upgrade -y && apt-get install -y openssh-server
+RUN apt-get update && apt-get upgrade -y && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN echo 'root:123123' | chpasswd
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config

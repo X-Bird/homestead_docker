@@ -5,6 +5,11 @@
 FROM ubuntu:14.04
 MAINTAINER x-bird <x-bird@qiubs.com>
 
+# set the locale
+RUN echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale && locale-gen en_US.UTF-8
+# Set The Timezone
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
 RUN apt-get update && apt-get upgrade -y && apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN echo 'root:123123' | chpasswd
@@ -46,8 +51,6 @@ RUN apt-get install -y --force-yes build-essential curl fail2ban gcc git libmcry
 # Install Python Httpie
 RUN pip install httpie
 
-# Set The Timezone
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # Restart SSH
 RUN ssh-keygen -A

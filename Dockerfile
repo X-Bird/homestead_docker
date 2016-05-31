@@ -19,7 +19,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 # Add A Few PPAs To Stay Current
 
 RUN apt-get install -y --force-yes software-properties-common
-RUN 
+
 RUN apt-add-repository ppa:fkrull/deadsnakes-python2.7 -y
 RUN apt-add-repository ppa:nginx/development -y
 RUN apt-add-repository ppa:rwky/redis -y
@@ -29,12 +29,12 @@ RUN apt-add-repository ppa:ondrej/php -y
 # Setup MySQL 5.7 Repositories
 
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 5072E1F5
-RUN sh -c 'echo "deb http://repo.mysql.com/apt/ubuntu/ trusty mysql-5.7" >> /etc/apt/sources.list.d/mysql.list'
+RUN echo "deb http://repo.mysql.com/apt/ubuntu/ trusty mysql-5.7" >> /etc/apt/sources.list.d/mysql.list
 
 # Setup Postgres 9.4 Repositories
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/postgresql.list
 
 # Update Package Lists
 

@@ -18,8 +18,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 # Add A Few PPAs To Stay Current
 
-RUN apt-get install -y --force-yes software-properties-common
-RUN apt-get install python2.7 python-pip
+RUN apt-get install -y --force-yes software-properties-common python2.7 python-pip
 
 RUN apt-add-repository ppa:fkrull/deadsnakes-python2.7 -y
 RUN apt-add-repository ppa:nginx/development -y

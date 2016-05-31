@@ -28,7 +28,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 # Add A Few PPAs To Stay Current
 
-RUN apt-get install -y --force-yes software-properties-common python2.7 python-pip
+RUN apt-get install -y --force-yes software-properties-common
 
 RUN apt-add-repository ppa:fkrull/deadsnakes-python2.7 -y
 RUN apt-add-repository ppa:nginx/development -y
@@ -51,7 +51,7 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc
 RUN apt-get update
 # Base Packages
 
-RUN apt-get install -y --force-yes build-essential curl fail2ban gcc git libmcrypt4 libpcre3-dev make supervisor ufw unattended-upgrades unzip whois zsh
+RUN apt-get install -y --force-yes build-essential curl fail2ban gcc git libmcrypt4 libpcre3-dev make python2.7 python-pip supervisor ufw unattended-upgrades unzip whois zsh
 
 # Install Python Httpie
 RUN pip install httpie

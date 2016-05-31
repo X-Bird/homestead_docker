@@ -8,9 +8,9 @@ MAINTAINER x-bird <x-bird@qiubs.com>
 # set the locale
 RUN echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale 
 RUN locale-gen en_US.UTF-8
-RUN export LANGUAGE=en_US.UTF-8
-RUN export LANG=en_US.UTF-8
-RUN export LC_ALL=en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 # Set The Timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -282,7 +282,7 @@ RUN npm install -g gulp
 #
 
 # Set The Automated Root Password
-RUN export DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/data-dir select ''"
 RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/root-pass password 123123"

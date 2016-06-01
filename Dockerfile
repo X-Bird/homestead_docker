@@ -12,6 +12,9 @@ ENV LANGUAGE en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
+# PASSWORD
+ENV PASSWORD=$(mkpasswd 123123)
+
 # Set The Timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
@@ -75,7 +78,7 @@ RUN cp /root/.profile /home/forzu/.profile
 RUN cp /root/.bashrc /home/forzu/.bashrc
 
 # Set The Sudo Password For Forzu
-RUN PASSWORD=$(mkpasswd 123123) usermod --password $PASSWORD forzu
+RUN usermod --password ${PASSWORD} forzu
 
 RUN cp /root/.ssh/authorized_keys /home/forzu/.ssh/authorized_keys
 

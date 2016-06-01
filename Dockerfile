@@ -302,6 +302,7 @@ RUN apt-get install -y mysql-server
 RUN echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
 
 # Configure Access Permissions For Root & Forzu Users
+RUN service mysql start
 RUN sed -i '/^bind-address/s/bind-address.*=.*/bind-address = */' /etc/mysql/my.cnf
 RUN mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO root@'123.123.123.123' IDENTIFIED BY '123123';"
 RUN mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO root@'%' IDENTIFIED BY '123123';"

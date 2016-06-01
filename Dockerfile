@@ -78,7 +78,8 @@ RUN cp /root/.profile /home/forzu/.profile
 RUN cp /root/.bashrc /home/forzu/.bashrc
 
 # Set The Sudo Password For Forzu
-RUN usermod --password ${PASSWORD} forzu
+# RUN usermod --password ${PASSWORD} forzu // 这句命令会报错 ：The command '/bin/sh -c usermod --password ${PASSWORD} forzu' returned a non-zero code: 2
+RUN ["usermod", "--password", "echo $PASSWORD", "forzu"]
 
 RUN cp /root/.ssh/authorized_keys /home/forzu/.ssh/authorized_keys
 

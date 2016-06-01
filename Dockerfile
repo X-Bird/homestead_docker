@@ -16,12 +16,8 @@ ENV LC_ALL en_US.UTF-8
 # PASSWORD
 ENV PASSWORD `mkpasswd 123123`
 
-# install supervisor
-RUN apt-get update && \
-    apt-get install -y supervisor && \
-    mkdir -p /var/log/supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-VOLUME ["/var/log/supervisor"]
+
+
 
 # Set The Timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -36,6 +32,12 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
+
+# install supervisor
+RUN apt-get update && \
+    apt-get install -y supervisor && \
+    mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Add A Few PPAs To Stay Current
 
@@ -364,7 +366,7 @@ RUN /etc/init.d/beanstalkd start
 
 
 EXPOSE 22 80 443 3306 6379
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/usr/bin/supervisord"]
 
 # set container entrypoints
 ENTRYPOINT ["/bin/bash","-c"]

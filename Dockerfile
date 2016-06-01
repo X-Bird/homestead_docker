@@ -13,7 +13,7 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 # PASSWORD
-ENV PASSWORD=$(mkpasswd 123123)
+ENV PASSWORD `mkpasswd 123123`
 
 # Set The Timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime

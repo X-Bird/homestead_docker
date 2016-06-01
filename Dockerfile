@@ -185,9 +185,9 @@ RUN echo "forzu ALL=NOPASSWD: /usr/sbin/service php5-fpm reload" >> /etc/sudoers
 
 # Install Base PHP Packages
 RUN apt-get install -y --force-yes php7.0-cli php7.0-dev \
-RUN php-pgsql php-sqlite3 php-gd \
-RUN php-curl php7.0-dev \
-RUN php-imap php-mysql php-memcached php-mcrypt
+    php-pgsql php-sqlite3 php-gd \
+    php-curl php7.0-dev \
+    php-imap php-mysql php-memcached php-mcrypt
 
 # Install Composer Package Manager
 

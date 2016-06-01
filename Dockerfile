@@ -61,7 +61,7 @@ RUN pip install httpie
 RUN ssh-keygen -A
 RUN service ssh restart
 
-RUN if [ ! -d /root/.ssh ] then mkdir -p /root/.ssh; touch /root/.ssh/authorized_keys; fi
+RUN if [ ! -d /root/.ssh ]; then mkdir -p /root/.ssh; touch /root/.ssh/authorized_keys; fi
 
 RUN useradd forzu
 RUN mkdir -p /home/forzu/.ssh

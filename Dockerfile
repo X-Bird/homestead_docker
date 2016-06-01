@@ -312,20 +312,16 @@ RUN apt-get install -y mysql-server
 RUN echo "default_password_lifetime = 0" >> /etc/mysql/my.cnf
 
 # Configure Access Permissions For Root & Forzu Users
-RUN service mysql start
 RUN sed -i '/^bind-address/s/bind-address.*=.*/bind-address = */' /etc/mysql/my.cnf
-RUN mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO root@'123.123.123.123' IDENTIFIED BY '123123';"
-RUN mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO root@'%' IDENTIFIED BY '123123';"
-RUN service mysql restart
-
-RUN mysql --user="root" --password="123123" -e "CREATE USER 'forzu'@'123.123.123.123' IDENTIFIED BY '123123';"
-RUN mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO 'forzu'@'123.123.123.123' IDENTIFIED BY '123123' WITH GRANT OPTION;"
-RUN mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO 'forzu'@'%' IDENTIFIED BY '123123' WITH GRANT OPTION;"
-RUN mysql --user="root" --password="123123" -e "FLUSH PRIVILEGES;"
-
-# Create The Initial Database If Specified
-
-RUN mysql --user="root" --password="123123" -e "CREATE DATABASE forzu;"
+RUN /usr/sbin/mysqld & \
+    sleep 10s && \
+    mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO root@'123.123.123.123' IDENTIFIED BY '123123';" && \
+    mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO root@'%' IDENTIFIED BY '123123';" && \
+    mysql --user="root" --password="123123" -e "CREATE USER 'forzu'@'123.123.123.123' IDENTIFIED BY '123123';" && \
+    mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO 'forzu'@'123.123.123.123' IDENTIFIED BY '123123' WITH GRANT OPTION;" && \
+    mysql --user="root" --password="123123" -e "GRANT ALL ON *.* TO 'forzu'@'%' IDENTIFIED BY '123123' WITH GRANT OPTION;" && \
+    mysql --user="root" --password="123123" -e "FLUSH PRIVILEGES;" && \
+    mysql --user="root" --password="123123" -e "CREATE DATABASE forzu;"
 
 #
 # REQUIRES:

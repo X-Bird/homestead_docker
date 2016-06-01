@@ -75,8 +75,7 @@ RUN cp /root/.profile /home/forzu/.profile
 RUN cp /root/.bashrc /home/forzu/.bashrc
 
 # Set The Sudo Password For Forzu
-RUN PASSWORD=$(mkpasswd 123123)
-RUN usermod --password $PASSWORD forzu
+RUN PASSWORD=$(mkpasswd 123123) usermod --password $PASSWORD forzu
 
 RUN cp /root/.ssh/authorized_keys /home/forzu/.ssh/authorized_keys
 

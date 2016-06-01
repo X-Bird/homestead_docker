@@ -330,35 +330,35 @@ RUN /usr/sbin/mysqld & \
 #
 
 # Install Postgres
-RUN apt-get install -y --force-yes postgresql-9.4
+# RUN apt-get install -y --force-yes postgresql-9.4
 
-# Configure Postgres For Remote Access
+# # Configure Postgres For Remote Access
 
-RUN sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/9.4/main/postgresql.conf
-RUN echo "host    all             all             0.0.0.0/0               md5" | tee -a /etc/postgresql/9.4/main/pg_hba.conf
-RUN sudo -u postgres psql -c "CREATE ROLE forzu LOGIN UNENCRYPTED PASSWORD '123123' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
-RUN service postgresql restart
+# RUN sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/9.4/main/postgresql.conf
+# RUN echo "host    all             all             0.0.0.0/0               md5" | tee -a /etc/postgresql/9.4/main/pg_hba.conf
+# RUN sudo -u postgres psql -c "CREATE ROLE forzu LOGIN UNENCRYPTED PASSWORD '123123' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
+# RUN service postgresql restart
 
-# Create The Initial Database If Specified
+# # Create The Initial Database If Specified
 
-RUN sudo -u postgres /usr/bin/createdb --echo --owner=forzu forzu
+# RUN sudo -u postgres /usr/bin/createdb --echo --owner=forzu forzu
 
 
 # Install & Configure Redis Server
 RUN apt-get install -y redis-server
 RUN sed -i 's/bind 127.0.0.1/bind 0.0.0.0/' /etc/redis/redis.conf
-RUN service redis-server restart
+# RUN service redis-server restart
 
 # Install & Configure Memcached
 RUN apt-get install -y memcached
 RUN sed -i 's/-l 127.0.0.1/-l 0.0.0.0/' /etc/memcached.conf
-RUN service memcached restart
+# RUN service memcached restart
 
 # Install & Configure Beanstalk
 RUN apt-get install -y --force-yes beanstalkd
 RUN sed -i "s/BEANSTALKD_LISTEN_ADDR.*/BEANSTALKD_LISTEN_ADDR=0.0.0.0/" /etc/default/beanstalkd
 RUN sed -i "s/#START=yes/START=yes/" /etc/default/beanstalkd
-RUN /etc/init.d/beanstalkd start
+# RUN /etc/init.d/beanstalkd start
 
 
 EXPOSE 22 80 443 3306 6379

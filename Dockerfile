@@ -262,7 +262,7 @@ RUN ln -s /etc/nginx/sites-available/catch-all /etc/nginx/sites-enabled/catch-al
 # Restart Nginx & PHP-FPM Services
 # Restart Nginx & PHP-FPM Services
 
-RUN if [ ! -z "\$(ps aux | grep php-fpm | grep -v grep)" ] then service php5-fpm restart; service php7.0-fpm restart; fi
+RUN if [ ! -z "\$(ps aux | grep php-fpm | grep -v grep)" ]; then service php5-fpm restart; service php7.0-fpm restart; fi
 
 RUN service nginx restart
 RUN service nginx reload

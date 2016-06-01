@@ -1,4 +1,5 @@
 # homestead
+# todo: # install prestissimo composer并发安装利器
 #
 # VERSION               0.0.1
 
@@ -14,6 +15,13 @@ ENV LC_ALL en_US.UTF-8
 
 # PASSWORD
 ENV PASSWORD `mkpasswd 123123`
+
+# install supervisor
+RUN apt-get update && \
+    apt-get install -y supervisor && \
+    mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+VOLUME ["/var/log/supervisor"]
 
 # Set The Timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime

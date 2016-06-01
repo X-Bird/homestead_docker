@@ -173,11 +173,11 @@ APT::Periodic::AutocleanInterval "7"; \n\
 APT::Periodic::Unattended-Upgrade "1"; \n\
 " >> /etc/apt/apt.conf.d/10periodic
 
-# Setup UFW Firewall
-RUN ufw allow 22
-RUN ufw allow 80
-RUN ufw allow 443
-RUN ufw --force enable
+# Setup UFW Firewall # 不需要利用docker的防火墙
+# RUN ufw allow 22
+# RUN ufw allow 80
+# RUN ufw allow 443
+# RUN ufw --force enable
 
 # Allow FPM Restart
 RUN echo "forzu ALL=NOPASSWD: /usr/sbin/service php7.0-fpm reload" > /etc/sudoers.d/php-fpm

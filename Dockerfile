@@ -287,9 +287,12 @@ RUN npm install -g gulp
 # Set The Automated Root Password
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/data-dir select ''"
-RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/root-pass password 123123"
-RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/re-root-pass password 123123"
+RUN ["debconf-set-selections", "<<<", "mysql-community-server mysql-community-server/data-dir select ''"]
+RUN ["debconf-set-selections", "<<<", "mysql-community-server mysql-community-server/root-pass password 123123"]
+RUN ["debconf-set-selections", "<<<", "mysql-community-server mysql-community-server/re-root-pass password 123123"]
+# RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/data-dir select ''"
+# RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/root-pass password 123123"
+# RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/re-root-pass password 123123"
 
 # Install MySQL
 
